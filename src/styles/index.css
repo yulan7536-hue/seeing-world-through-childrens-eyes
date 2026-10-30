@@ -1,0 +1,729 @@
+/* ============================================================
+   童眼看世界 · crayon / hand-drawn design tokens
+   ============================================================ */
+:root {
+  --paper: #fbf5e9;
+  --paper-card: #fffdf6;
+  --ink: #3a3128;
+  --ink-soft: #7a6a58;
+  --line: #d8c9ae;
+  --yellow: #f7c948;
+  --red: #e4634f;
+  --red-soft: #f0917f;
+  --sky: #7fbdd9;
+  --green: #7fae6f;
+
+  --font-cute: 'ZCOOL KuaiLe', 'Yuanti SC', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', system-ui, sans-serif;
+
+  --card-radius: 26px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-cute);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(1200px 520px at 50% -8%, #fffdf6 0%, rgba(255, 253, 246, 0) 62%),
+    radial-gradient(900px 420px at 12% 100%, #f6efdd 0%, rgba(246, 239, 221, 0) 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+}
+
+/* ============================================================
+   layout
+   ============================================================ */
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 48px 20px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.stage {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 470px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+/* ============================================================
+   brand / title
+   ============================================================ */
+.brand {
+  text-align: center;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.brand__kicker {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.75;
+}
+
+.brand__title {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 3.4rem);
+  line-height: 1.12;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-shadow: 1px 2px 0 rgba(247, 201, 72, 0.38);
+}
+
+.brand__sub {
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.brand__squiggle {
+  width: min(260px, 70%);
+  height: 14px;
+  margin-top: 2px;
+  overflow: visible;
+}
+
+/* ============================================================
+   card
+   ============================================================ */
+.card {
+  position: relative;
+  width: 100%;
+  padding: 30px 28px 26px;
+  background: transparent;
+  transform: rotate(-0.45deg);
+  animation: card-in 0.5s ease-out both;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card > .rough-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  filter: drop-shadow(0 18px 22px rgba(58, 49, 40, 0.14));
+}
+
+/* washi tape corners */
+.card::before,
+.card::after {
+  content: '';
+  position: absolute;
+  width: 74px;
+  height: 22px;
+  background: rgba(247, 201, 72, 0.55);
+  border-left: 1px dashed rgba(58, 49, 40, 0.15);
+  border-right: 1px dashed rgba(58, 49, 40, 0.15);
+  z-index: 2;
+}
+
+.card::before {
+  top: -10px;
+  left: 22px;
+  transform: rotate(-6deg);
+}
+
+.card::after {
+  bottom: -9px;
+  right: 26px;
+  transform: rotate(4deg);
+  background: rgba(127, 189, 217, 0.45);
+}
+
+.card--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  color: var(--ink-soft);
+}
+
+.card--welcome {
+  text-align: center;
+}
+
+.blink {
+  animation: blink 1.2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) rotate(-0.45deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(-0.45deg);
+  }
+}
+
+.card__title {
+  margin: 18px 0 4px;
+  font-size: 1.42rem;
+  letter-spacing: 0.05em;
+}
+
+.card__subtitle {
+  margin: 0 0 22px;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   tabs
+   ============================================================ */
+.tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.tab {
+  font-family: inherit;
+  font-size: 0.98rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  background: transparent;
+  border: 2px dashed rgba(58, 49, 40, 0.28);
+  border-radius: 999px;
+  padding: 6px 22px;
+  cursor: pointer;
+  transition: transform 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+}
+
+.tab:hover {
+  transform: translateY(-1px) rotate(-0.6deg);
+  color: var(--ink);
+}
+
+.tab--active {
+  color: var(--ink);
+  border-style: solid;
+  border-color: var(--ink);
+  background: rgba(247, 201, 72, 0.42);
+  box-shadow: 2px 2px 0 rgba(58, 49, 40, 0.18);
+}
+
+.tab:focus-visible,
+.btn:focus-visible,
+.swap__link:focus-visible,
+.field__input:focus-visible,
+.field__peek:focus-visible,
+.note__link:focus-visible {
+  outline: 2px dashed var(--sky);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   form fields
+   ============================================================ */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field__label {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  padding-left: 6px;
+  letter-spacing: 0.1em;
+}
+
+.field__box {
+  position: relative;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.18s ease;
+}
+
+.field__box:focus-within {
+  transform: rotate(-0.3deg) scale(1.005);
+}
+
+.field__box .rough-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.field__input {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.field__input::placeholder {
+  color: rgba(122, 106, 88, 0.55);
+  letter-spacing: 0.02em;
+}
+
+.field__input:focus {
+  outline: none;
+}
+
+.field__peek {
+  position: relative;
+  z-index: 2;
+  border: 0;
+  background: transparent;
+  font-size: 1rem;
+  padding: 0 14px 0 0;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.75;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.field__peek:hover {
+  transform: scale(1.12);
+  opacity: 1;
+}
+
+.field__hint {
+  margin: 0;
+  padding-left: 8px;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   buttons
+   ============================================================ */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 10px 26px;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.16s ease, filter 0.16s ease;
+}
+
+.btn .rough-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.btn__label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow:
+    0 0 6px rgba(255, 253, 246, 0.95),
+    0 0 12px rgba(255, 253, 246, 0.8);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px) rotate(-0.7deg);
+  filter: saturate(1.08);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px) rotate(0deg);
+}
+
+.btn:disabled {
+  cursor: progress;
+  opacity: 0.72;
+}
+
+.btn--submit {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.btn__dots {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.btn__dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  opacity: 0.35;
+  animation: dot 1s ease-in-out infinite;
+}
+
+.btn__dots i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.btn__dots i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes dot {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   notes
+   ============================================================ */
+.note {
+  margin: 2px 0 0;
+  padding: 10px 14px;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  border-radius: 14px;
+  border: 2px dashed;
+  transform: rotate(-0.5deg);
+}
+
+.note--error {
+  color: #8c3427;
+  border-color: rgba(228, 99, 79, 0.6);
+  background: rgba(240, 145, 127, 0.16);
+}
+
+.note--ok {
+  color: #45663c;
+  border-color: rgba(127, 174, 111, 0.65);
+  background: rgba(127, 174, 111, 0.14);
+}
+
+.note__link {
+  display: block;
+  margin-top: 4px;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.82rem;
+  color: #8c3427;
+  text-decoration: underline wavy rgba(228, 99, 79, 0.7);
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ============================================================
+   swap link
+   ============================================================ */
+.swap {
+  margin: 2px 0 0;
+  text-align: center;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+}
+
+.swap__link {
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.86rem;
+  color: var(--red);
+  cursor: pointer;
+  padding: 0 4px;
+  text-decoration: underline wavy rgba(228, 99, 79, 0.55);
+  text-underline-offset: 4px;
+}
+
+.swap__link:hover {
+  color: #b8462f;
+}
+
+/* ============================================================
+   welcome state
+   ============================================================ */
+.avatar {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin: 4px auto 0;
+  animation: bob 4s ease-in-out infinite;
+}
+
+.avatar .rough-layer {
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+}
+
+.profile {
+  margin: 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.profile__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding: 8px 14px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.profile dt {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+
+.profile dd {
+  margin: 0;
+  font-size: 0.88rem;
+  word-break: break-all;
+  text-align: right;
+}
+
+/* ============================================================
+   doodles
+   ============================================================ */
+.doodles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.doodle {
+  position: absolute;
+}
+
+.doodle .rough-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.doodle--sun {
+  width: 116px;
+  height: 116px;
+  top: 7%;
+  left: 5%;
+  animation: float 9s ease-in-out infinite;
+}
+
+.doodle--cloud {
+  width: 158px;
+  height: 74px;
+  top: 13%;
+  right: 6%;
+  animation: float 11s ease-in-out infinite reverse;
+  opacity: 0.9;
+}
+
+.doodle--kite {
+  width: 82px;
+  height: 108px;
+  bottom: 20%;
+  left: 8%;
+  animation: float 8s ease-in-out infinite 0.6s;
+  opacity: 0.92;
+}
+
+.doodle--star {
+  width: 46px;
+  height: 46px;
+  top: 34%;
+  right: 12%;
+  animation: twinkle 5s ease-in-out infinite;
+}
+
+.doodle--grass {
+  left: -5%;
+  right: -5%;
+  bottom: -6px;
+  height: 64px;
+  opacity: 0.85;
+}
+
+.doodle--grass svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1.6deg);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.94) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06) rotate(6deg);
+  }
+}
+
+/* ============================================================
+   footer
+   ============================================================ */
+.foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: rgba(122, 106, 88, 0.75);
+}
+
+.foot__dot {
+  opacity: 0.6;
+}
+
+.config-warning {
+  margin: 0;
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  color: #8c3427;
+  border: 2px dashed rgba(228, 99, 79, 0.5);
+  border-radius: 12px;
+  background: rgba(240, 145, 127, 0.12);
+}
+
+.config-warning code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.76rem;
+}
+
+/* ============================================================
+   responsive
+   ============================================================ */
+@media (max-width: 720px) {
+  .page {
+    padding: 112px 16px 32px;
+  }
+
+  .brand__kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.26em;
+  }
+
+  .doodle--sun {
+    width: 60px;
+    height: 60px;
+    top: 20px;
+    left: 5%;
+  }
+
+  .doodle--cloud {
+    width: 82px;
+    height: 40px;
+    top: 30px;
+    right: 4%;
+  }
+
+  .doodle--kite,
+  .doodle--star {
+    display: none;
+  }
+
+  .card {
+    padding: 24px 18px 20px;
+  }
+
+  .card::before,
+  .card::after {
+    width: 58px;
+    height: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

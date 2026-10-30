@@ -1,10 +1,12 @@
-# teacher-interview-system
+# 童颜看世界 · Seeing the World Through Children's Eyes
 
-教师面试系统 —— 项目仓库。
+> *Understanding the World in Children's Eyes*
+
+用孩子的眼睛看世界 —— 记录、探索与呈现儿童视角下的世界。
 
 ## 简介
 
-本项目用于构建服务于教师招聘/面试流程的系统。当前仓库处于初始化阶段，尚未提交业务代码。
+本项目当前处于初始化阶段，业务代码尚未提交。
 
 ## 开始使用
 
